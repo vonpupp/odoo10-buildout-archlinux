@@ -1,0 +1,23 @@
+session_name: odoo
+windows:
+- window_name: SERVER
+  layout: main-vertical
+  focus: true
+  panes:
+    - shell_command:
+      - vagrant up
+      - vagrant ssh
+      focus: true
+- window_name: CODE
+  layout: main-vertical
+  shell_command_before:
+    - cd specific_parts/specific_addons
+  panes:
+    - echo "vim"
+    - echo "vim"
+- window_name: GIT
+  layout: main-vertical
+  shell_command_before:
+    - cd specific_parts/specific_addons
+  panes:
+    - echo "git s"

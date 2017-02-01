@@ -1,0 +1,12 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+  config.vm.provider "docker" do |d|
+    d.image = "vorlock/ubuntu1404"
+    d.has_ssh = true
+    #d.volumes = ["/vagrant"]
+  end
+  config.vm.synced_folder ".", "/vagrant"
+end

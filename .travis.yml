@@ -1,0 +1,60 @@
+dist: xenial
+sudo: false
+# BR l10n requires sudo
+sudo: required
+
+language: python
+python:
+  - "2.7"
+
+cache:
+  pip: true
+  directories:
+    - $HOME/buildout-cache
+
+virtualenv:
+  system_site_packages: true
+
+addons:
+  apt:
+    packages:
+      - expect-dev   # provides unbuffer utility
+      - python-lxml  # because pip installation is slow
+
+env:
+  - VERSION="10.0" LINT_CHECK="1" DOC="0" ROBOT="0"
+  - VERSION="10.0" LINT_CHECK="0" DOC="0" ROBOT="0" ODOO_REPO="odoo/odoo"
+  - VERSION="10.0" LINT_CHECK="0" DOC="0" ROBOT="0" ODOO_REPO="OCA/OCB"
+  - VERSION="10.0" LINT_CHECK="0" DOC="0" ROBOT="0" UNIT_TEST="1"
+  # TODO: DOC, ROBOT
+
+before_install:
+  # Needed for BR l10n
+  - sudo locale-gen en_US en_US.UTF-8 pt_BR.UTF-8
+  - sudo dpkg-reconfigure locales
+  - provision/bootstrap-packages-ubuntu-xenial64.sh
+  - provision/bootstrap-database.sh
+  - provision/bootstrap-environment.sh
+  - pip install coveralls  # Force install coveralls in all cases of MQT for self_test script.
+  - pip install anybox.testing.openerp      # Faster, no BR l10n
+  #- git clone https://github.com/it-projects-llc/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
+  - travis/travis_install_buildout
+
+install:
+  - bin/buildout -N -t 20                   # BR l10n
+  #- travis_install_nightly
+
+script:
+#  - coverage run --append ./travis/travis_run_tests
+#  - coverage run --append ./travis/self_tests
+  #- travis_run_tests
+  - travis/travis_run_script
+
+after_success:
+  - TESTS="1" TESTS_ENABLE="1" LINT_CHECK="0" travis_after_tests_success
+    #    coveralls
+
+notifications:
+  email: false
