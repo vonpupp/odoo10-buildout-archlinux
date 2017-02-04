@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
- \
+
 # Atualizar pacotes
 #sudo pacman -Syyu
- \
+
 # Pacotes principais
 # Obtido do pacte no AUR, se for preciso instalar diretamente do AUR.
 pacaur -S \
@@ -56,3 +56,4 @@ pacaur -S \
     wkhtmltopdf-static \
     python2-ofxparse \
     python2-qrcode \
+    xmlsec \

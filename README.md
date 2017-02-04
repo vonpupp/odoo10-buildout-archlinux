@@ -1,18 +1,6 @@
-# ODOO MODULE TUTORIAL
+# ODOO BUILDOUT ARCHLINUX
 
-Example on how to build a module based on Odoo v10.
-
-[build a module based on v10]: https://www.odoo.com/documentation/10.0/howtos/backend.html
-
-[![Travis-CI](https://img.shields.io/travis/vonpupp/odoo10-buildout-archlinux.svg)](https://travis-ci.org/vonpupp/odoo10-buildout-archlinux)
-[![Coveralls Status](https://coveralls.io/repos/vonpupp/odoo10-buildout-archlinux/badge.svg)](https://coveralls.io/r/vonpupp/odoo10-buildout-archlinux)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/vonpupp/odoo10-buildout-archlinux.svg)](https://scrutinizer-ci.com/g/vonpupp/odoo10-buildout-archlinux/)
-[![Stories in Ready](https://badge.waffle.io/vonpupp/odoo10-buildout-archlinux.png?label=ready&title=Ready)](http://waffle.io/vonpupp/odoo10-buildout-archlinux)
-[![Stories in progress](https://badge.waffle.io/vonpupp/odoo10-buildout-archlinux.png?label=progress&title=Progress)](http://waffle.io/vonpupp/odoo10-buildout-archlinux)
-
-Throughput Graph
-
-[![Throughput Graph](https://graphs.waffle.io/vonpupp/odoo10-buildout-archlinux/throughput.svg)](https://waffle.io/vonpupp/odoo10-buildout-archlinux/metrics)
+Example on how to build a buildout environment based on Odoo v10
 
 
 ## Creating a development environment using virtualbox
@@ -25,13 +13,13 @@ Throughput Graph
 ./provision/bootstrap-database.sh
 
 # Create a virtualenv locally
-./provision/bootstrap-environment.sh
+./provision/bootstrap-buildout.sh
 
 # Start odoo
 bin/start_odoo
 
 # Open the browser
-firefox 0.0.0.0:8069
+firefox localhost:8069
 ```
 
 ## Creating a module using mrbob odoo templates
@@ -118,26 +106,3 @@ import epdb; epdb.serve()
 # LOCAL: Attach
 python -c "import epdb; epdb.connect()"
 ```
-
-
-## Roadmap
-
-List of desirable features on this repo (out of the scope of the book):
-
-- [X] Use buildout
-- [X] Travis
-- [X] Add code quality
-- [X] Add bob templates
-- [X] Add maintainer quality tools
-- [ ] Add documentation (sphinx)
-- [ ] Add UML
-- [ ] HTML5 layer on top of the JSONRPC API
-- [ ] Learn commit style (https://www.odoo.com/documentation/10.0/reference/guidelines.html#git)
-- [ ] Use odoo-bin
-- [ ] Deploy
-- [ ] Functional test
-- [ ] Learn to user openupgrade (OCA)?
-- [ ] Tests with runbot?
-- [ ] Review: Add coverage (problems with MQT)
-- [ ] Review: Docker (problem with dbus and systemd)
-- [ ] Review: Use watchdog (without watchdog XML files automatically reloaded, code is not)
